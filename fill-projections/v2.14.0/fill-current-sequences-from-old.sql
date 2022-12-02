@@ -1,3 +1,5 @@
+BEGIN;
+
 INSERT INTO adminapi.current_sequences
 SELECT 'adminapi.styling2', current_sequence, event_timestamp, last_successful_spooler_run, instance_id
 FROM adminapi.current_sequences as sequences
@@ -118,19 +120,9 @@ FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.lockout_policies';
 
 INSERT INTO projections.current_sequences
-SELECT 'projections.login_names2_domains', aggregate_type, current_sequence, instance_id, timestamp
+SELECT 'projections.login_names2', aggregate_type, current_sequence, instance_id, timestamp
 FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.login_names_domains';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.login_names2_policies', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.login_names_policies';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.login_names2_users', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.login_names_users';
+WHERE projection_name = 'projections.login_names';
 
 INSERT INTO projections.current_sequences
 SELECT 'projections.login_policies4', aggregate_type, current_sequence, instance_id, timestamp
@@ -241,3 +233,5 @@ INSERT INTO projections.current_sequences
 SELECT 'projections.users6_notifications', aggregate_type, current_sequence, instance_id, timestamp
 FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.users5_notifications';
+
+COMMIT;
