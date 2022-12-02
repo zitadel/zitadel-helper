@@ -14,15 +14,15 @@ With this the new projections should be normally created with the new version, w
 ## Fill in the new projections
 
 To fill in the adminapi tables:
-[execute the content of this file on your cockroach instance](v2.14.0/fill-adminapi-from-old-adminapi.sql)
+[execute the content of this file on your cockroach instance](v2.13.1-to-v2.14.0/fill-adminapi-from-old-adminapi.sql)
 
 To fill in the auth tables:
-[execute the content of this file on your cockroach instance](v2.14.0/fill-auth-from-old-auth.sql)
+[execute the content of this file on your cockroach instance](v2.13.1-to-v2.14.0/fill-auth-from-old-auth.sql)
 
 To fill in the projection tables:
-[execute the content of this file on your cockroach instance](v2.14.0/fill-projections-from-old-projections.sql)
+[execute the content of this file on your cockroach instance](v2.13.1-to-v2.14.0/fill-projections-from-old-projections.sql)
 
 ## Fill in the current_sequences for the new projections
 
 To fill in the current_sequences:
-[execute the content of this file on your cockroach instance](v2.14.0/fill-current-sequences-from-old.sql)
+[execute the content of this file on your cockroach instance](v2.13.1-to-v2.14.0/fill-current-sequences-from-old.sql)
