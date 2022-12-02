@@ -1,4 +1,4 @@
-# Fill prjections v2.13.1 to v2.14.0
+# Fill projections v2.13.1 to v2.14.0
 
 ## Create the new projections
 
