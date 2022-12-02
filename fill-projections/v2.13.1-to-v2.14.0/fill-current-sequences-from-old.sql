@@ -1,3 +1,5 @@
+BEGIN;
+
 INSERT INTO adminapi.current_sequences
 SELECT 'adminapi.styling2', current_sequence, event_timestamp, last_successful_spooler_run, instance_id
 FROM adminapi.current_sequences as sequences
@@ -43,21 +45,6 @@ FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.apps3';
 
 INSERT INTO projections.current_sequences
-SELECT 'projections.apps4_api_configs', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.apps3_api_configs';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.apps4_oidc_configs', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.apps3_oidc_configs';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.apps4_saml_configs', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.apps3_saml_configs';
-
-INSERT INTO projections.current_sequences
 SELECT 'projections.authn_keys2', aggregate_type, current_sequence, instance_id, timestamp
 FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.authn_keys';
@@ -93,16 +80,6 @@ FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.idps2';
 
 INSERT INTO projections.current_sequences
-SELECT 'projections.idps3_jwt_config', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.idps2_jwt_config';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.idps3_oidc_config', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.idps2_oidc_config';
-
-INSERT INTO projections.current_sequences
 SELECT 'projections.instance_members3', aggregate_type, current_sequence, instance_id, timestamp
 FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.instance_members2';
@@ -118,19 +95,9 @@ FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.lockout_policies';
 
 INSERT INTO projections.current_sequences
-SELECT 'projections.login_names2_domains', aggregate_type, current_sequence, instance_id, timestamp
+SELECT 'projections.login_names2', aggregate_type, current_sequence, instance_id, timestamp
 FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.login_names_domains';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.login_names2_policies', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.login_names_policies';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.login_names2_users', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.login_names_users';
+WHERE projection_name = 'projections.login_names';
 
 INSERT INTO projections.current_sequences
 SELECT 'projections.login_policies4', aggregate_type, current_sequence, instance_id, timestamp
@@ -227,17 +194,4 @@ SELECT 'projections.users6', aggregate_type, current_sequence, instance_id, time
 FROM projections.current_sequences as sequences
 WHERE projection_name = 'projections.users5';
 
-INSERT INTO projections.current_sequences
-SELECT 'projections.users6_humans', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.users5_humans';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.users6_machines', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.users5_machines';
-
-INSERT INTO projections.current_sequences
-SELECT 'projections.users6_notifications', aggregate_type, current_sequence, instance_id, timestamp
-FROM projections.current_sequences as sequences
-WHERE projection_name = 'projections.users5_notifications';
+COMMIT;

@@ -1,3 +1,5 @@
+BEGIN;
+
 INSERT INTO projections.actions3
 SELECT *
 FROM projections.actions2
@@ -77,6 +79,7 @@ INSERT INTO projections.lockout_policies2
 SELECT *
 FROM projections.lockout_policies
 ON CONFLICT DO NOTHING;
+
 INSERT INTO projections.login_names2_domains
 SELECT *
 FROM projections.login_names_domains
@@ -89,6 +92,7 @@ INSERT INTO projections.login_names2_users
 SELECT *
 FROM projections.login_names_users
 ON CONFLICT DO NOTHING;
+
 INSERT INTO projections.login_policies4
 SELECT *
 FROM projections.login_policies3
@@ -268,3 +272,5 @@ FROM projections.user_grants2 as user_grants
                    ON project_grants.grant_id = user_grants.grant_id AND
                       project_grants.instance_id = user_grants.instance_id
 ON CONFLICT DO NOTHING;
+
+COMMIT;

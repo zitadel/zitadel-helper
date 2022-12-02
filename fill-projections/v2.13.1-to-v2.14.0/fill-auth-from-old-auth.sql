@@ -1,3 +1,5 @@
+BEGIN;
+
 INSERT INTO auth.idp_configs2
 SELECT *
 FROM auth.idp_configs
@@ -22,3 +24,5 @@ INSERT INTO auth.users2
 SELECT *
 FROM auth.users
 ON CONFLICT DO NOTHING;
+
+COMMIT;
