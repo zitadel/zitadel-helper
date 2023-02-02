@@ -1,5 +1,9 @@
 # Fill projections v2.18.x to v2.19.0
 
+When updating ZITADEL, itL will create new projections and update them with the latest data automatically.
+This may take some time, during which users might expirence performance impacts or get outdated data.
+To bypass this, you can update the new projections manually.
+
 ## Create the new projections
 
 To create the new projections you only have to run ZITADEL with the "zitadel setup" command.
