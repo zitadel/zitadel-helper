@@ -6,3 +6,4 @@ This includes situations in which ZITADEL could handle everything, but there is 
 Situations:
 - [Backup and restore of cockroach databases](db/backup-and-restore.md)
 - [Update ZITADEL from v2.13.1 to v2.14.0](fill-projections/fill-projections-v2.13.1-to-v2.14.0.md)
+- [Update ZITADEL from v2.18.x to v2.19.0](fill-projections/fill-projections-v2.18.x-to-v2.19.0.md)
