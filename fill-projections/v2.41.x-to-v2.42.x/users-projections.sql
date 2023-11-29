@@ -48,6 +48,24 @@ FROM projections.instance_members3
 WHERE owner_removed = false
 ON CONFLICT DO NOTHING;
 
+INSERT INTO projections.apps6
+SELECT id, name, project_id, creation_date, change_date, resource_owner, instance_id, state, sequence
+FROM projections.apps5
+WHERE owner_removed = false
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.users9
+SELECT id, creation_date, change_date, sequence, state, resource_owner, instance_id, username, type
+FROM projections.users8
+WHERE owner_removed = false
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.user_metadata5
+SELECT user_id, creation_date, change_date, sequence, resource_owner, instance_id, key, value
+FROM projections.user_metadata4
+WHERE owner_removed = false
+ON CONFLICT DO NOTHING;
+
 
 INSERT INTO projections.current_states
 SELECT 'projections.projects4', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
@@ -95,6 +113,24 @@ INSERT INTO projections.current_states
 SELECT 'projections.instance_members4', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
 FROM projections.current_states
 WHERE projection_name = 'projections.instance_members3'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.current_states
+SELECT 'projections.apps6', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
+FROM projections.current_states
+WHERE projection_name = 'projections.apps5'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.current_states
+SELECT 'projections.users9', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
+FROM projections.current_states
+WHERE projection_name = 'projections.users8'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.current_states
+SELECT 'projections.user_metadata5', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
+FROM projections.current_states
+WHERE projection_name = 'projections.user_metadata4'
 ON CONFLICT DO NOTHING;
 
 COMMIT;
