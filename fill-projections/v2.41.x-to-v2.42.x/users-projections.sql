@@ -6,9 +6,9 @@ FROM projections.projects3
 WHERE owner_removed = false
     ON CONFLICT DO NOTHING;
 
-INSERT INTO projections.instance_members4
-SELECT creation_date, change_date, user_id, user_resource_owner, roles, sequence, resource_owner, instance_id, id
-FROM projections.instance_members3
+INSERT INTO projections.flow_triggers3
+SELECT flow_type, change_date, sequence, trigger_type, resource_owner, instance_id, trigger_sequence, action_id
+FROM projections.flow_triggers2
 WHERE owner_removed = false
 ON CONFLICT DO NOTHING;
 
@@ -66,6 +66,25 @@ FROM projections.user_metadata4
 WHERE owner_removed = false
 ON CONFLICT DO NOTHING;
 
+INSERT INTO projections.login_names3_users
+SELECT id, user_name, resource_owner, instance_id
+FROM projections.login_names2_users
+WHERE owner_removed = false
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.login_names3_policies
+SELECT must_be_domain, is_default, resource_owner, instance_id
+FROM projections.login_names2_policies
+WHERE owner_removed = false
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.login_names3_domains
+SELECT name, is_primary, resource_owner, instance_id
+FROM projections.login_names2_domains
+WHERE owner_removed = false
+ON CONFLICT DO NOTHING;
+
+
 
 INSERT INTO projections.current_states
 SELECT 'projections.projects4', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
@@ -74,9 +93,9 @@ WHERE projection_name = 'projections.projects3'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO projections.current_states
-SELECT 'projections.instance_members4', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
+SELECT 'projections.flow_triggers3', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
 FROM projections.current_states
-WHERE projection_name = 'projections.instance_members3'
+WHERE projection_name = 'projections.flow_triggers2'
 ON CONFLICT DO NOTHING;
 
 INSERT INTO projections.current_states
@@ -131,6 +150,12 @@ INSERT INTO projections.current_states
 SELECT 'projections.user_metadata5', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
 FROM projections.current_states
 WHERE projection_name = 'projections.user_metadata4'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.current_states
+SELECT 'projections.login_names3', instance_id, last_updated, aggregate_id, aggregate_type, sequence, event_date, position
+FROM projections.current_states
+WHERE projection_name = 'projections.login_names2'
 ON CONFLICT DO NOTHING;
 
 COMMIT;
