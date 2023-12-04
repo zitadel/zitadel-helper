@@ -54,11 +54,47 @@ FROM projections.apps5
 WHERE owner_removed = false
 ON CONFLICT DO NOTHING;
 
+INSERT INTO projections.apps6_oidc_configs
+SELECT *
+FROM projections.apps5_oidc_configs
+WHERE EXISTS (select 1 from projections.apps5 a WHERE a.instance_id = instance_id and a.id = app_id and a.owner_removed = false)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.apps6_api_configs
+SELECT *
+FROM projections.apps5_api_configs
+WHERE EXISTS (select 1 from projections.apps5 a WHERE a.instance_id = instance_id and a.id = app_id and a.owner_removed = false)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.apps6_saml_configs
+SELECT *
+FROM projections.apps5_saml_configs
+WHERE EXISTS (select 1 from projections.apps5 a WHERE a.instance_id = instance_id and a.id = app_id and a.owner_removed = false)
+ON CONFLICT DO NOTHING;
+
 INSERT INTO projections.users9
 SELECT id, creation_date, change_date, sequence, state, resource_owner, instance_id, username, type
 FROM projections.users8
 WHERE owner_removed = false
 ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.users9_humans
+SELECT *
+FROM projections.users8_humans
+WHERE EXISTS (select 1 from projections.users8 u WHERE u.instance_id = instance_id and u.id = user_id and u.owner_removed = false)
+    ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.users9_machines
+SELECT *
+FROM projections.users8_machines
+WHERE EXISTS (select 1 from projections.users8 u WHERE u.instance_id = instance_id and u.id = user_id and u.owner_removed = false)
+    ON CONFLICT DO NOTHING;
+
+INSERT INTO projections.users9_notifications
+SELECT *
+FROM projections.users8_notifications
+WHERE EXISTS (select 1 from projections.users8 u WHERE u.instance_id = instance_id and u.id = user_id and u.owner_removed = false)
+    ON CONFLICT DO NOTHING;
 
 INSERT INTO projections.user_metadata5
 SELECT user_id, creation_date, change_date, sequence, resource_owner, instance_id, key, value
